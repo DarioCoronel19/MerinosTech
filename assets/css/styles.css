@@ -1,0 +1,13 @@
+/* Estilos Globales Merinos Tech */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Optimización personalizada del Slider de Entrada de la Calculadora */
+input[type="range"]::-webkit-slider-thumb {
+    transition: transform 0.1s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
