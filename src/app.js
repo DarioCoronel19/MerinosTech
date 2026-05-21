@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCalcSubmit = document.getElementById('btn-calc-submit');
 
     const btnWhatsappDirect = document.getElementById('btn-whatsapp-direct');
+    const btnEmailDirect = document.getElementById('btn-email-direct');
     const btnFormRestart = document.getElementById('btn-form-restart');
 
     // Estado global de la cotización actual
@@ -40,6 +41,29 @@ document.addEventListener('DOMContentLoaded', () => {
         telefono: "",
         plan: "",
         mensaje: ""
+    };
+
+    const contactoEmail = 'coronel.lumbreras@gmail.com';
+
+    const formatProfessionalMessage = (cotizacion) => {
+        return `Hola Merinos Tech!\n\nSolicitud de cotización formal de servicio de TI con la siguiente información:\n\n- Nombre: ${cotizacion.nombre}\n- Empresa: ${cotizacion.empresa}\n- Correo: ${cotizacion.email}\n- Teléfono: ${cotizacion.telefono}\n- Servicio de interés: ${cotizacion.plan}\n- Requerimientos: ${cotizacion.mensaje}\n\nQuedo atento a su respuesta y agradezco la atención.`;
+    };
+
+    const formatProfessionalEmailSubject = (cotizacion) => {
+        const target = cotizacion.empresa ? cotizacion.empresa : cotizacion.nombre;
+        return `Solicitud de Cotización de TI - ${target}`;
+    };
+
+    const formatProfessionalEmailBody = (cotizacion) => {
+        return `Hola Merinos Tech,%0A%0AQuisiera recibir una propuesta formal de servicio de TI con la siguiente información:%0A%0A- Nombre: ${cotizacion.nombre}%0A- Empresa: ${cotizacion.empresa}%0A- Correo: ${cotizacion.email}%0A- Teléfono: ${cotizacion.telefono}%0A- Servicio de interés: ${cotizacion.plan}%0A- Requerimientos: ${cotizacion.mensaje}%0A%0AQuedo atento a su pronta respuesta.%0A%0AMuchas gracias.%0A%0ASaludos,%0A${cotizacion.nombre}`;
+    };
+
+    const buildGmailComposeUrl = (to, subject, body) => {
+        return `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${body}`;
+    };
+
+    const buildWhatsAppUrl = (phone, message) => {
+        return `https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(message)}`;
     };
 
 
@@ -176,6 +200,14 @@ document.addEventListener('DOMContentLoaded', () => {
         cotizacionTemporal.plan = formPlan.value;
         cotizacionTemporal.mensaje = formMessage.value.trim() || "Ninguno";
 
+        const subject = formatProfessionalEmailSubject(cotizacionTemporal);
+        const body = formatProfessionalEmailBody(cotizacionTemporal);
+        const mensajeWhatsApp = formatProfessionalMessage(cotizacionTemporal);
+
+        // Intentamos abrir Gmail Compose con el formato profesional para el usuario
+        const gmailUrl = buildGmailComposeUrl(contactoEmail, subject, body);
+        window.open(gmailUrl, '_blank');
+
         // Mapeo estructurado para que el correo te llegue legible y ordenado
         const datosCorreo = {
             "Nombre del Cliente": cotizacionTemporal.nombre,
@@ -184,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Teléfono": cotizacionTemporal.telefono,
             "Servicio Solicitado": cotizacionTemporal.plan,
             "Mensaje o Requerimientos": cotizacionTemporal.mensaje,
-            "_subject": "🚨 Nueva Solicitud de Cotización de TI - " + cotizacionTemporal.empresa
+            "_subject": subject
         };
 
         // Despacho asíncrono vía AJAX/Fetch a FormSubmit
@@ -221,10 +253,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ENVIAR DATOS ADICIONALES A WHATSAPP ---
     btnWhatsappDirect?.addEventListener('click', () => {
-        const t = cotizacionTemporal;
-        const textoWhatsApp = `Hola Merinos Tech!\n\nMe gustaría solicitar una cotización formal:\n*Nombre:* ${t.nombre}\n*Empresa:* ${t.empresa}\n*Teléfono:* ${t.telefono}\n*Servicio:* ${t.plan}\n*Detalles adicionales:* ${t.mensaje}`;
-        const url = `https://api.whatsapp.com/send?phone=528334536048&text=${encodeURIComponent(textoWhatsApp)}`;
+        const url = buildWhatsAppUrl('528334536048', formatProfessionalMessage(cotizacionTemporal));
         window.open(url, '_blank');
+    });
+
+    btnEmailDirect?.addEventListener('click', () => {
+        const subject = formatProfessionalEmailSubject(cotizacionTemporal);
+        const body = formatProfessionalEmailBody(cotizacionTemporal);
+        const gmailUrl = buildGmailComposeUrl(contactoEmail, subject, body);
+        window.open(gmailUrl, '_blank');
     });
 
     // --- REINICIAR FORMULARIO ---
