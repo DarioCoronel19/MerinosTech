@@ -202,11 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const subject = formatProfessionalEmailSubject(cotizacionTemporal);
         const body = formatProfessionalEmailBody(cotizacionTemporal);
-        const mensajeWhatsApp = formatProfessionalMessage(cotizacionTemporal);
-
-        // Intentamos abrir Gmail Compose con el formato profesional para el usuario
-        const gmailUrl = buildGmailComposeUrl(contactoEmail, subject, body);
-        window.open(gmailUrl, '_blank');
 
         // Mapeo estructurado para que el correo te llegue legible y ordenado
         const datosCorreo = {
