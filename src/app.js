@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnWhatsappDirect?.addEventListener('click', () => {
         const t = cotizacionTemporal;
         const textoWhatsApp = `Hola Merinos Tech!\n\nMe gustaría solicitar una cotización formal:\n*Nombre:* ${t.nombre}\n*Empresa:* ${t.empresa}\n*Teléfono:* ${t.telefono}\n*Servicio:* ${t.plan}\n*Detalles adicionales:* ${t.mensaje}`;
-        const url = `https://wa.me/528334536048?text=${encodeURIComponent(textoWhatsApp)}`;
+        const url = `https://api.whatsapp.com/send?phone=528334536048&text=${encodeURIComponent(textoWhatsApp)}`;
         window.open(url, '_blank');
     });
 
