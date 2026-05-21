@@ -157,6 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm?.addEventListener('submit', (event) => {
         event.preventDefault();
 
+        if (!contactForm.reportValidity()) {
+            return;
+        }
+
         // Feedback visual de carga en el botón
         if (submitBtn) {
             submitBtn.disabled = true;
@@ -165,12 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Recolectar variables actuales del DOM
-        cotizacionTemporal.nombre = document.getElementById('form-name').value;
-        cotizacionTemporal.empresa = document.getElementById('form-company').value || "No especificada";
-        cotizacionTemporal.email = document.getElementById('form-email').value;
-        cotizacionTemporal.telefono = document.getElementById('form-phone').value;
+        cotizacionTemporal.nombre = document.getElementById('form-name').value.trim();
+        cotizacionTemporal.empresa = document.getElementById('form-company').value.trim();
+        cotizacionTemporal.email = document.getElementById('form-email').value.trim();
+        cotizacionTemporal.telefono = document.getElementById('form-phone').value.trim();
         cotizacionTemporal.plan = formPlan.value;
-        cotizacionTemporal.mensaje = formMessage.value || "Ninguno";
+        cotizacionTemporal.mensaje = formMessage.value.trim() || "Ninguno";
 
         // Mapeo estructurado para que el correo te llegue legible y ordenado
         const datosCorreo = {
@@ -184,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Despacho asíncrono vía AJAX/Fetch a FormSubmit
-        fetch("https://formsubmit.co/ajax/Eduardo.mefig@gmail.com", {
+        fetch("https://formsubmit.co/ajax/coronel.lumbreras@gmail.com", {
             method: "POST",
             headers: { 
                 'Content-Type': 'application/json',
@@ -219,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnWhatsappDirect?.addEventListener('click', () => {
         const t = cotizacionTemporal;
         const textoWhatsApp = `Hola Merinos Tech!\n\nMe gustaría solicitar una cotización formal:\n*Nombre:* ${t.nombre}\n*Empresa:* ${t.empresa}\n*Teléfono:* ${t.telefono}\n*Servicio:* ${t.plan}\n*Detalles adicionales:* ${t.mensaje}`;
-        const url = `https://wa.me/18334536048?text=${encodeURIComponent(textoWhatsApp)}`;
+        const url = `https://wa.me/528334536048?text=${encodeURIComponent(textoWhatsApp)}`;
         window.open(url, '_blank');
     });
 
