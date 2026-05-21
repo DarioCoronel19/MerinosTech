@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+});
+
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        window.scrollTo(0, 0);
+    }
+});
+
+window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     
     // --- ELEMENTOS DEL DOM ---
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -82,6 +99,85 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenu.classList.add('hidden');
             menuIcon.className = 'fa-solid fa-bars text-xl';
         });
+    });
+
+    const revealSections = document.querySelectorAll('.reveal-section');
+    if (revealSections.length) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                }
+            });
+        }, { threshold: 0.15 });
+        revealSections.forEach(section => revealObserver.observe(section));
+    }
+
+    const legalLinks = document.querySelectorAll('[data-legal]');
+    const legalPanel = document.getElementById('legal-panel');
+    const legalContent = document.getElementById('legal-content');
+    const legalTitle = document.getElementById('legal-title');
+    const legalClose = document.getElementById('legal-close');
+
+    const legalTexts = {
+        terminos: {
+            title: 'Términos de Servicio',
+            html: `
+                <p>Al utilizar los servicios de Merinos Tech, usted acepta las condiciones comerciales, los plazos de atención y las reglas de operación de nuestros servicios de soporte.</p>
+                <p>Merinos Tech ofrece soporte remoto y presencial, mantenimiento preventivo, reparación de equipos, instalación de redes y consultoría técnica. La descripción exacta del servicio se acuerda antes de iniciar el trabajo y se formaliza en la cotización o contrato correspondiente.</p>
+                <ul class="list-disc list-inside space-y-3 text-slate-400 text-sm leading-relaxed">
+                    <li>El servicio cubre los elementos expresamente incluidos en la póliza o propuesta formal.</li>
+                    <li>Trabajos extraordinarios fuera del alcance se cotizan y facturan por separado.</li>
+                    <li>Los tiempos de respuesta se determinan en función de la urgencia, el plan contratado y la accesibilidad a los equipos.</li>
+                    <li>El cliente es responsable de proporcionar información veraz, acceso físico o remoto y los recursos necesarios para la atención.</li>
+                </ul>
+                <p>Merinos Tech realiza los servicios con profesionalismo y buenas prácticas, pero no asegura resultados específicos en casos de daños anteriores, pérdida de datos o configuraciones ajenas no declaradas.</p>
+                <p>Para consultas adicionales, por favor comuníquese con nuestro equipo de atención.</p>
+            `
+        },
+        aviso: {
+            title: 'Aviso de Privacidad',
+            html: `
+                <p>En Merinos Tech tomamos muy en serio la privacidad y el uso responsable de sus datos personales.</p>
+                <p>Recabamos información para gestionar solicitudes de cotización, brindar atención técnica y enviar comunicaciones relevantes.</p>
+                <h4 class="text-sm font-semibold text-white mt-4">Datos recabados</h4>
+                <p>Los datos que podemos solicitar incluyen nombre, correo electrónico, teléfono, empresa y descripción de requerimientos.</p>
+                <h4 class="text-sm font-semibold text-white mt-4">Finalidad del tratamiento</h4>
+                <ul class="list-disc list-inside space-y-3 text-slate-400 text-sm leading-relaxed">
+                    <li>Atender solicitudes de cotización y contacto sobre servicios contratados.</li>
+                    <li>Enviar información comercial autorizada relacionada con soporte e infraestructura de TI.</li>
+                    <li>Proporcionar soporte técnico y seguimiento a incidentes o mantenimientos.</li>
+                </ul>
+                <h4 class="text-sm font-semibold text-white mt-4">Seguridad y derechos</h4>
+                <ul class="list-disc list-inside space-y-3 text-slate-400 text-sm leading-relaxed">
+                    <li>Su información se resguarda con medidas técnicas y organizativas para evitar accesos no autorizados.</li>
+                    <li>Puede solicitar la rectificación, cancelación o limitación del uso de sus datos personales.</li>
+                    <li>Solo compartimos datos con terceros cuando es necesario para cumplir el servicio y bajo acuerdos de confidencialidad.</li>
+                </ul>
+            `
+        }
+    };
+
+    const showLegalSection = (type) => {
+        const data = legalTexts[type];
+        if (!data || !legalPanel || !legalContent || !legalTitle) return;
+        legalTitle.textContent = data.title;
+        legalContent.innerHTML = data.html;
+        legalPanel.classList.remove('hidden');
+        legalPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    legalLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const type = event.currentTarget.getAttribute('data-legal');
+            if (type) showLegalSection(type);
+        });
+    });
+
+    legalClose?.addEventListener('click', () => {
+        legalPanel?.classList.add('hidden');
     });
 
 
