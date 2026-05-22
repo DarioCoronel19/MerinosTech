@@ -72,17 +72,51 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const formatProfessionalEmailBody = (cotizacion) => {
-        return `Hola Merinos Tech,%0A%0AQuisiera recibir una propuesta formal de servicio de TI con la siguiente información:%0A%0A- Nombre: ${cotizacion.nombre}%0A- Empresa: ${cotizacion.empresa}%0A- Correo: ${cotizacion.email}%0A- Teléfono: ${cotizacion.telefono}%0A- Servicio de interés: ${cotizacion.plan}%0A- Requerimientos: ${cotizacion.mensaje}%0A%0AQuedo atento a su pronta respuesta.%0A%0AMuchas gracias.%0A%0ASaludos,%0A${cotizacion.nombre}`;
+        return `Hola Merinos Tech,%0A%0AQuisiera recibir una propuesta formal de servicio de TI con la siguiente información:%0A%0A- Nombre: ${cotizacion.nombre}%0A- Empresa: ${cotizacion.empresa}%0A- Correo: ${cotizacion.email}%0A- Teléfono: ${cotizacion.telefono}%0A- Servicio de interés: ${cotizacion.plan}%0A- Requerimientos: ${cotizacion.mensaje}%0A%0AQuedo atento a su pronta respuesta.%0A%0AMuchas gracias.%0A%0ASaludos%0A${cotizacion.nombre}`;
     };
 
     const buildGmailComposeUrl = (to, subject, body) => {
         return `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${body}`;
     };
 
+    const buildMailtoUrl = (to, subject, body) => {
+        const s = encodeURIComponent(subject);
+        const b = encodeURIComponent(body);
+        return `mailto:${encodeURIComponent(to)}?subject=${s}&body=${b}`;
+    };
+
+    const buildWhatsAppProfessionalMessage = (cotizacion) => {
+        return `Hola Merinos Tech, buen día.
+
+Solicito una cotización formal para servicio de TI para mi empresa.
+
+- Nombre: ${cotizacion.nombre}
+- Empresa: ${cotizacion.empresa}
+- Correo: ${cotizacion.email}
+- Teléfono: ${cotizacion.telefono}
+- Servicio de interés: ${cotizacion.plan}
+- Requerimientos: ${cotizacion.mensaje}
+
+¡Quedo atento, gracias de antemano!`;
+    };
+
+
+
     const buildWhatsAppUrl = (phone, message) => {
         return `https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(message)}`;
     };
 
+    const openGmailOrMailto = (to, subject, body) => {
+        const mailtoUrl = buildMailtoUrl(to, subject, body);
+        const gmailUrl = buildGmailComposeUrl(to, subject, body);
+
+        // Intentar abrir la app/cliente con mailto (mejor UX en móvil/PC)
+        // Si el navegador no lo soporta, usamos Gmail web como fallback.
+        window.location.href = mailtoUrl;
+        setTimeout(() => {
+            try { window.open(gmailUrl, '_blank'); } catch (e) {}
+        }, 500);
+    };
 
     // --- MENÚ MÓVIL ---
     mobileMenuBtn.addEventListener('click', () => {
