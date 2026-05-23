@@ -784,13 +784,13 @@
                     </div>
                     
                     <div class="space-y-4">
-                        <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=coronel.lumbreras@gmail.com&su=Solicitud%20de%20Cotizaci%C3%B3n%20de%20TI&body=Hola%20Merinos%20Tech%2C%0D%0A%0AQuisiera%20recibir%20una%20propuesta%20formal%20de%20servicio%20de%20TI%20con%20la%20siguiente%20informaci%C3%B3n%3A%0D%0A%0A-%20Nombre%3A%20%0D%0A-%20Empresa%3A%20%0D%0A-%20Correo%3A%20%0D%0A-%20Tel%C3%A9fono%3A%20%0D%0A-%20Servicio%20de%20inter%C3%A9s%3A%20%0D%0A-%20Requerimientos%3A%20%0D%0A%0AQuedo%20atento%20a%20su%20pronta%20respuesta.%0D%0A%0AMuchas%20gracias.%0D%0A%0ASaludos%2C" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-4 p-4 bg-slate-900/60 hover:bg-slate-900 rounded-xl border border-slate-850 hover:border-brand-500/30 transition-all">
+                        <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=eduardo.mefig@gmail.com&su=Solicitud%20de%20Cotizaci%C3%B3n%20de%20TI&body=Hola%20Merinos%20Tech%2C%0D%0A%0AQuisiera%20recibir%20una%20propuesta%20formal%20de%20servicio%20de%20TI%20con%20la%20siguiente%20informaci%C3%B3n%3A%0D%0A%0A-%20Nombre%3A%20%0D%0A-%20Empresa%3A%20%0D%0A-%20Correo%3A%20%0D%0A-%20Tel%C3%A9fono%3A%20%0D%0A-%20Servicio%20de%20inter%C3%A9s%3A%20%0D%0A-%20Requerimientos%3A%20%0D%0A%0AQuedo%20atento%20a%20su%20pronta%20respuesta.%0D%0A%0AMuchas%20gracias.%0D%0A%0ASaludos%2C" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-4 p-4 bg-slate-900/60 hover:bg-slate-900 rounded-xl border border-slate-850 hover:border-brand-500/30 transition-all">
                             <div class="w-10 h-10 rounded-lg bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
                             <div class="overflow-hidden">
                                 <span class="block text-[10px] uppercase tracking-wider text-slate-500">Correo Electrónico</span>
-<span class="text-xs sm:text-sm font-bold text-white break-all">coronel.lumbreras@gmail.com</span>
+                                <span class="text-xs sm:text-sm font-bold text-white break-all">eduardo.mefig@gmail.com</span>
                             </div>
                         </a>
                         
@@ -830,63 +830,73 @@
                 <div class="lg:col-span-7">
                     <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl relative">
                         <h4 class="text-lg font-bold text-white mb-6">Completa tus datos para enviarte una propuesta</h4>
-                        <form id="contact-form" class="space-y-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-            <label for="form-name" class="block text-sm font-medium text-gray-300 mb-2">Nombre Completo</label>
-            <input type="text" id="form-name" name="Nombre Completo" required 
-                   class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white" 
-                   placeholder="Ej. Juan Pérez">
-        </div>
+                        
+                        <form action="https://formsubmit.co/eduardo.mefig@gmail.com" method="POST" id="contact-form" class="space-y-6">
+                            
+                            <input type="hidden" name="_template" value="plain">
+                            
+                            <input type="hidden" name="_replyto" id="form-replyto">
 
-        <div>
-            <label for="form-company" class="block text-sm font-medium text-gray-300 mb-2">Nombre de la Empresa</label>
-            <input type="text" id="form-company" name="Empresa" required 
-                   class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white" 
-                   placeholder="Ej. Mi Oficina S.A.">
-        </div>
-    </div>
+                            <input type="hidden" name="1. Introducción" value="Hola Merinos Tech, Quisiera recibir una propuesta formal de servicio de TI con la siguiente información:">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-            <label for="form-email" class="block text-sm font-medium text-gray-300 mb-2">Correo Electrónico</label>
-            <input type="type" id="form-email" name="Email" required 
-                   class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white" 
-                   placeholder="correo@empresa.com">
-        </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="form-name" class="block text-sm font-medium text-gray-300 mb-2">Nombre Completo</label>
+                                    <input type="text" id="form-name" name="2. Nombre" required 
+                                           class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white" 
+                                           placeholder="Ej. Juan Pérez">
+                                </div>
 
-        <div>
-            <label for="form-phone" class="block text-sm font-medium text-gray-300 mb-2">Número de Teléfono</label>
-            <input type="tel" id="form-phone" name="Telefono" required 
-                   class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white" 
-                   placeholder="8112345678">
-        </div>
-    </div>
+                                <div>
+                                    <label for="form-company" class="block text-sm font-medium text-gray-300 mb-2">Nombre de la Empresa</label>
+                                    <input type="text" id="form-company" name="3. Empresa" required 
+                                           class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white" 
+                                           placeholder="Ej. Mi Oficina S.A.">
+                                </div>
+                            </div>
 
-    <div>
-        <label for="form-plan" class="block text-sm font-medium text-gray-300 mb-2">Póliza o Servicio de Interés</label>
-        <select id="form-plan" name="Servicio de Interes" required 
-                class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white appearance-none">
-            <option value="" disabled selected>-- Selecciona una opción --</option>
-            <option value="Poliza Soporte Preventivo">Póliza de Soporte Preventivo</option>
-            <option value="Poliza Soporte Correctivo">Póliza de Soporte Correctivo</option>
-            <option value="Servicio de Infraestructura">Servicio de Infraestructura y Redes</option>
-            <option value="Mantenimiento Servidores">Mantenimiento de Servidores y TI</option>
-        </select>
-    </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="form-email" class="block text-sm font-medium text-gray-300 mb-2">Correo Electrónico</label>
+                                    <input type="email" id="form-email" name="4. Correo" required 
+                                           class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white" 
+                                           placeholder="correo@empresa.com">
+                                </div>
 
-    <div>
-        <label for="form-message" class="block text-sm font-medium text-gray-300 mb-2">¿En qué podemos ayudarte?</label>
-        <textarea id="form-message" name="Mensaje Adicional" rows="4" required 
-                  class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white resize-none" 
-                  placeholder="Escribe detalles adicionales de tus computadoras, servidores o requerimientos de TI..."></textarea>
-    </div>
+                                <div>
+                                    <label for="form-phone" class="block text-sm font-medium text-gray-300 mb-2">Número de Teléfono</label>
+                                    <input type="tel" id="form-phone" name="5. Teléfono" required 
+                                           class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white" 
+                                           placeholder="8112345678">
+                                </div>
+                            </div>
 
-    <button type="submit" id="submit-btn" 
-            class="w-full py-4 bg-[#7ee787] hover:bg-[#63c66c] text-black font-bold rounded-lg transition duration-300 shadow-lg text-center">
-        Solicitar Cotización
-    </button>
-</form>
+                            <div>
+                                <label for="form-plan" class="block text-sm font-medium text-gray-300 mb-2">Póliza o Servicio de Interés</label>
+                                <select id="form-plan" name="6. Servicio de interés" required 
+                                        class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white appearance-none">
+                                    <option value="" disabled selected>-- Selecciona una opción --</option>
+                                    <option value="Póliza Soporte Preventivo">Póliza de Soporte Preventivo</option>
+                                    <option value="Póliza Soporte Correctivo">Póliza de Soporte Correctivo</option>
+                                    <option value="Servicio de Infraestructura">Servicio de Infraestructura y Redes</option>
+                                    <option value="Mantenimiento Servidores">Mantenimiento de Servidores y TI</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="form-message" class="block text-sm font-medium text-gray-300 mb-2">¿En qué podemos ayudarte?</label>
+                                <textarea id="form-message" name="7. Requerimientos" rows="4" required 
+                                          class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 text-white resize-none" 
+                                          placeholder="Escribe detalles adicionales de tus computadoras, servidores o requerimientos de TI..."></textarea>
+                            </div>
+
+                            <input type="hidden" name="8. Cierre" value="Quedo atento a su pronta respuesta. Muchas gracias. Saludos.">
+
+                            <button type="submit" id="submit-btn" 
+                                    class="w-full py-4 bg-[#7ee787] hover:bg-[#63c66c] text-black font-bold rounded-lg transition duration-300 shadow-lg text-center">
+                                Solicitar Cotización
+                            </button>
+                        </form>
 
                         <div id="form-success" class="hidden absolute inset-0 bg-slate-900 rounded-3xl p-8 flex flex-col items-center justify-center text-center space-y-4 z-20">
                             <div class="w-16 h-16 rounded-full bg-green-500/20 text-brand-400 flex items-center justify-center text-3xl">
@@ -915,9 +925,6 @@
         </div>
     </section>
 
-    <section id="terminos-de-servicio" class="hidden"></section>
-    <section id="aviso-de-privasidad" class="hidden"></section>
-
     <footer class="bg-slate-950 border-t border-slate-900 pt-16 pb-8 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-900">
@@ -935,10 +942,9 @@
                         <a href="https://www.facebook.com/share/1EGNBTrKJo/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-colors" aria-label="Enlace a Facebook">
                             <i class="fa-brands fa-facebook-f text-sm"></i>
                         </a>
-                        <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=coronel.lumbreras@gmail.com&su=Solicitud%20de%20Cotizaci%C3%B3n%20de%20TI&body=Hola%20Merinos%20Tech%2C%0D%0A%0AQuisiera%20recibir%20una%20propuesta%20formal%20de%20servicio%20de%20TI%20con%20la%20siguiente%20informaci%C3%B3n%3A%0D%0A%0A-%20Nombre%3A%20%0D%0A-%20Empresa%3A%20%0D%0A-%20Correo%3A%20%0D%0A-%20Tel%C3%A9fono%3A%20%0D%0A-%20Servicio%20de%20inter%C3%A9s%3A%20%0D%0A-%20Requerimientos%3A%20%0D%0A%0AQuedo%20atento%20a%20su%20pronta%20respuesta.%0D%0A%0AMuchas%20gracias.%0D%0A%0ASaludos%2C" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-colors" aria-label="Enlace a Email">
+                        <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=eduardo.mefig@gmail.com&su=Solicitud%20de%20Cotizaci%C3%B3n%20de%20TI&body=Hola%20Merinos%20Tech%2C%0D%0A%0AQuisiera%20recibir%20una%20propuesta%20formal%20de%20servicio%20de%20TI%20con%20la%20siguiente%20informaci%C3%B3n%3A%0D%0A%0A-%20Nombre%3A%20%0D%0A-%20Empresa%3A%20%0D%0A-%20Correo%3A%20%0D%0A-%20Tel%C3%A9fono%3A%20%0D%0A-%20Servicio%20de%20inter%C3%A9s%3A%20%0D%0A-%20Requerimientos%3A%20%0D%0A%0AQuedo%20atento%20a%20su%20pronta%20respuesta.%0D%0A%0AMuchas%20gracias.%0D%0A%0ASaludos%2C" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-colors" aria-label="Enlace a Email">
                             <i class="fa-solid fa-envelope text-sm"></i>
                         </a>
-                        
                         <a href="https://api.whatsapp.com/send?phone=528334536048&text=Hola%20Merinos%20Tech%2C%20buen%20d%C3%ADa.%0A%0AQuisiera%20solicitar%20una%20cotizaci%C3%B3n%20formal%20de%20servicio%20de%20TI%20para%20mi%20empresa.%0A%0A%C2%A1Quedo%20atento%2C%20gracias%20de%20antemano%21" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-colors" aria-label="Enlace a WhatsApp">
                             <i class="fa-brands fa-whatsapp text-sm"></i>
                         </a>
@@ -974,31 +980,32 @@
                 </div>
             </div>
 
-                <div id="legal-panel" class="hidden mt-10 rounded-3xl border border-slate-800 bg-slate-900/80 p-6 text-slate-300">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                        <div>
-                            <h4 id="legal-title" class="text-lg font-bold text-white">Términos de Servicio</h4>
-                            <p class="text-xs text-slate-500 mt-1">Información legal visible en el mismo footer.</p>
-                        </div>
-                        <button id="legal-close" class="rounded-lg border border-slate-700 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400 hover:text-white hover:border-slate-600 transition-colors">
-                            Cerrar
-                        </button>
+            <div id="legal-panel" class="hidden mt-10 rounded-3xl border border-slate-800 bg-slate-900/80 p-6 text-slate-300">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h4 id="legal-title" class="text-lg font-bold text-white">Términos de Servicio</h4>
+                        <p class="text-xs text-slate-500 mt-1">Información legal visible en el mismo footer.</p>
                     </div>
-                    <div id="legal-content" class="space-y-4 text-sm leading-relaxed"></div>
+                    <button id="legal-close" class="rounded-lg border border-slate-700 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400 hover:text-white hover:border-slate-600 transition-colors">
+                        Cerrar
+                    </button>
                 </div>
-                <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-                    <p class="flex items-center gap-2">
-                        &copy; 2026 Merinos Tech. Todos los derechos reservados.
-                    </p>
-                    <a href="https://www.linkedin.com/public-profile/settings/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BbFwinmfNTfO5cDizpPmb9A%3D%3D" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-slate-300 hover:text-brand-400 transition-colors text-xs font-semibold">
-                        <i class="fa-brands fa-linkedin text-brand-400"></i>
-                        <span>Dario Coronel</span>
-                    </a>
-                    <div class="flex items-center space-x-4">
-                        <a href="#!" data-legal="terminos" class="hover:text-slate-300 transition-colors cursor-pointer">Términos de Servicio</a>
-                        <a href="#!" data-legal="aviso" class="hover:text-slate-300 transition-colors cursor-pointer">Aviso de Privacidad</a>
-                    </div>
+                <div id="legal-content" class="space-y-4 text-sm leading-relaxed"></div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                <p class="flex items-center gap-2">
+                    &copy; 2026 Merinos Tech. Todos los derechos reservados.
+                </p>
+                <a href="https://www.linkedin.com/public-profile/settings/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BbFwinmfNTfO5cDizpPmb9A%3D%3D" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-slate-300 hover:text-brand-400 transition-colors text-xs font-semibold">
+                    <i class="fa-brands fa-linkedin text-brand-400"></i>
+                    <span>Dario Coronel</span>
+                </a>
+                <div class="flex items-center space-x-4">
+                    <a href="#!" data-legal="terminos" class="hover:text-slate-300 transition-colors cursor-pointer">Términos de Servicio</a>
+                    <a href="#!" data-legal="aviso" class="hover:text-slate-300 transition-colors cursor-pointer">Aviso de Privacidad</a>
                 </div>
+            </div>
         </div>
     </footer>
 

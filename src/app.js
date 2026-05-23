@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formMessage = document.getElementById('form-message');
     const contactForm = document.getElementById('contact-form');
     const formSuccess = document.getElementById('form-success');
-    const submitBtn = document.getElementById('submit-btn'); // Vinculado para el estado de carga
+    const submitBtn = document.getElementById('submit-btn');
 
     const btnPlanBasico = document.getElementById('btn-plan-basico');
     const btnPlanEstandar = document.getElementById('btn-plan-estandar');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mensaje: ""
     };
 
-    const contactoEmail = 'coronel.lumbreras@gmail.com';
+    const contactoEmail = 'eduardo.mefig@gmail.com';
 
     const formatProfessionalMessage = (cotizacion) => {
         return `Hola Merinos Tech!\n\nSolicitud de cotización formal de servicio de TI con la siguiente información:\n\n- Nombre: ${cotizacion.nombre}\n- Empresa: ${cotizacion.empresa}\n- Correo: ${cotizacion.email}\n- Teléfono: ${cotizacion.telefono}\n- Servicio de interés: ${cotizacion.plan}\n- Requerimientos: ${cotizacion.mensaje}\n\nQuedo atento a su respuesta y agradezco la atención.`;
@@ -79,43 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${body}`;
     };
 
-    const buildMailtoUrl = (to, subject, body) => {
-        const s = encodeURIComponent(subject);
-        const b = encodeURIComponent(body);
-        return `mailto:${encodeURIComponent(to)}?subject=${s}&body=${b}`;
-    };
-
     const buildWhatsAppProfessionalMessage = (cotizacion) => {
-        return `Hola Merinos Tech, buen día.
-
-Solicito una cotización formal para servicio de TI para mi empresa.
-
-- Nombre: ${cotizacion.nombre}
-- Empresa: ${cotizacion.empresa}
-- Correo: ${cotizacion.email}
-- Teléfono: ${cotizacion.telefono}
-- Servicio de interés: ${cotizacion.plan}
-- Requerimientos: ${cotizacion.mensaje}
-
-¡Quedo atento, gracias de antemano!`;
+        return `Hola Merinos Tech, buen día.\n\nSolicito una cotización formal para servicio de TI para mi empresa.\n\n- Nombre: ${cotizacion.nombre}\n- Empresa: ${cotizacion.empresa}\n- Correo: ${cotizacion.email}\n- Teléfono: ${cotizacion.telefono}\n- Servicio de interés: ${cotizacion.plan}\n- Requerimientos: ${cotizacion.mensaje}\n\n¡Quedo atento, gracias de antemano!`;
     };
-
-
 
     const buildWhatsAppUrl = (phone, message) => {
         return `https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(message)}`;
-    };
-
-    const openGmailOrMailto = (to, subject, body) => {
-        const mailtoUrl = buildMailtoUrl(to, subject, body);
-        const gmailUrl = buildGmailComposeUrl(to, subject, body);
-
-        // Intentar abrir la app/cliente con mailto (mejor UX en móvil/PC)
-        // Si el navegador no lo soporta, usamos Gmail web como fallback.
-        window.location.href = mailtoUrl;
-        setTimeout(() => {
-            try { window.open(gmailUrl, '_blank'); } catch (e) {}
-        }, 500);
     };
 
     // --- MENÚ MÓVIL ---
@@ -217,7 +186,7 @@ Solicito una cotización formal para servicio de TI para mi empresa.
 
     // --- MANEJO DE PLANES (CARDS) ---
     function seleccionarPlan(nombrePlan, precio) {
-        if (formPlan) formPlan.value = `Plan ${nombrePlan}`;
+        if (formPlan) formPlan.value = `Póliza Soporte ${nombrePlan === 'Básico' || nombrePlan === 'Estándar' ? 'Preventivo' : 'Correctivo'}`;
         if (formMessage) {
             formMessage.value = `Hola Merinos Tech, me interesa agendar una asesoría técnica para contratar la Póliza Mensual del Plan ${nombrePlan} de $${precio.toLocaleString()} MXN para mi empresa.`;
         }
@@ -283,18 +252,18 @@ Solicito una cotización formal para servicio de TI para mi empresa.
         let planRecomendado = "";
         let inversionText = "";
 
-        if (value <= 15) { planRecomendado = "Plan Básico"; inversionText = "$7,000 MXN"; }
-        else if (value <= 20) { planRecomendado = "Plan Estándar"; inversionText = "$9,000 MXN"; }
-        else if (value <= 40) { planRecomendado = "Plan Premium"; inversionText = "$12,000 MXN"; }
-        else if (value <= 60) { planRecomendado = "Plan Platinum"; inversionText = "$16,000 MXN"; }
-        else { planRecomendado = "Personalizado"; inversionText = "Precio a convenir"; }
+        if (value <= 15) { planRecomendado = "Póliza Soporte Preventivo"; inversionText = "$7,000 MXN"; }
+        else if (value <= 20) { planRecomendado = "Póliza Soporte Preventivo"; inversionText = "$9,000 MXN"; }
+        else if (value <= 40) { planRecomendado = "Póliza Soporte Correctivo"; inversionText = "$12,000 MXN"; }
+        else if (value <= 60) { planRecomendado = "Póliza Soporte Correctivo"; inversionText = "$16,000 MXN"; }
+        else { planRecomendado = "Mantenimiento Servidores"; inversionText = "Precio a convenir"; }
 
         if (formPlan) {
-            formPlan.value = planRecomendado !== "Personalizado" ? planRecomendado : "Ninguno Seleccionado";
+            formPlan.value = planRecomendado;
         }
 
         if (formMessage) {
-            formMessage.value = `Hola Merinos Tech, utilicé la calculadora inteligente. Requiero una propuesta formal para una infraestructura de ${value} equipos de cómputo. El plan recomendado es el ${planRecomendado} (${inversionText}).`;
+            formMessage.value = `Hola Merinos Tech, utilicé la calculadora inteligente. Requiero una propuesta formal para una infraestructura de ${value} equipos de cómputo. El plan de interés es: ${planRecomendado} (${inversionText}).`;
         }
 
         document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
@@ -306,60 +275,42 @@ Solicito una cotización formal para servicio de TI para mi empresa.
     // Ejecución inicial de la calculadora
     updateCalculator();
 
-    // --- FORMULARIO DE CONTACTO (CORREGIDO Y OPTIMIZADO PARA ENVÍO REAL) ---
-    contactForm?.addEventListener('submit', (event) => {
-        event.preventDefault();
 
-        if (!contactForm.reportValidity()) {
-            return;
+    // --- ENVIAR FORMULARIO (CONFIGURADO PARA TEXTO PLANO DE FORMSUBMIT) ---
+    contactForm?.addEventListener('submit', (event) => {
+        // Enlazamos dinámicamente el valor del input de correo al campo oculto replyto antes del submit nativo
+        const clientEmail = document.getElementById('form-email').value.trim();
+        const replyToField = document.getElementById('form-replyto');
+        if (replyToField) {
+            replyToField.value = clientEmail;
         }
 
-        // Feedback visual de carga en el botón
+        // Cargamos los datos actuales del formulario en el estado global por si el usuario usa los botones de fallback
+        cotizacionTemporal.nombre = document.getElementById('form-name').value.trim();
+        cotizacionTemporal.empresa = document.getElementById('form-company').value.trim();
+        cotizacionTemporal.email = clientEmail;
+        cotizacionTemporal.telefono = document.getElementById('form-phone').value.trim();
+        cotizacionTemporal.plan = formPlan.value;
+        cotizacionTemporal.mensaje = formMessage.value.trim() || "Ninguno";
+
+        // Cambiamos el estado visual del botón
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerText = "Preparando correo...";
+            submitBtn.innerText = "Enviando solicitud...";
             submitBtn.style.opacity = "0.7";
         }
 
-        // Recolectar variables actuales del DOM
-        cotizacionTemporal.nombre = document.getElementById('form-name').value.trim();
-        cotizacionTemporal.empresa = document.getElementById('form-company').value.trim();
-        cotizacionTemporal.email = document.getElementById('form-email').value.trim();
-        cotizacionTemporal.telefono = document.getElementById('form-phone').value.trim();
-        cotizacionTemporal.plan = formPlan.value || "No especificado";
-        cotizacionTemporal.mensaje = formMessage.value.trim() || "Ninguno";
-
-        // Generar el asunto y el cuerpo usando tus funciones de formato con codificación web correcta (%0A)
-        const subjectText = formatProfessionalEmailSubject(cotizacionTemporal);
-        const bodyText = formatProfessionalEmailBody(cotizacionTemporal);
-
-        // Mostrar el panel de éxito en la interfaz (UX)
-        formSuccess?.classList.remove('hidden');
-
-        // --- DISPARAR APERTURA DEL CLIENTE NATIVO (PC / MÓVIL) ---
-        // Usamos directamente el protocolo mailto con el cuerpo correctamente formateado.
-        // Esto obligará a iOS, Android, Windows y macOS a abrir su app predeterminada (Outlook, Gmail, Apple Mail, etc.)
-        const mailtoUrl = `mailto:${encodeURIComponent(contactoEmail)}?subject=${encodeURIComponent(subjectText)}&body=${bodyText}`;
-        
-        // Redirección inmediata
-        window.location.href = mailtoUrl;
-
-        // Reestablecer propiedades del botón de enviar tras el disparo
-        setTimeout(() => {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Solicitar Cotización";
-                submitBtn.style.opacity = "1";
-            }
-        }, 1000);
+        // NOTA: No añadimos event.preventDefault() aquí. 
+        // Dejamos que FormSubmit reciba los datos de manera nativa e inmediata.
     });
 
-    // --- ENVIAR DATOS ADICIONALES A WHATSAPP ---
+    // --- ENVIAR DATOS ADICIONALES A WHATSAPP DESDE EL MODAL DE ÉXITO ---
     btnWhatsappDirect?.addEventListener('click', () => {
-        const url = buildWhatsAppUrl('528334536048', formatProfessionalMessage(cotizacionTemporal));
+        const url = buildWhatsAppUrl('528334536048', buildWhatsAppProfessionalMessage(cotizacionTemporal));
         window.open(url, '_blank');
     });
 
+    // --- ABRIR GMAIL EN CASO DE FALLBACK ---
     btnEmailDirect?.addEventListener('click', () => {
         const subject = formatProfessionalEmailSubject(cotizacionTemporal);
         const body = formatProfessionalEmailBody(cotizacionTemporal);
