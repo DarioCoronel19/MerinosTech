@@ -306,8 +306,7 @@ Solicito una cotización formal para servicio de TI para mi empresa.
     // Ejecución inicial de la calculadora
     updateCalculator();
 
-
-    // --- FORMULARIO DE CONTACTO (MODIFICADO PARA ENVÍO REAL DE CORREO) ---
+    // --- FORMULARIO DE CONTACTO (CORREGIDO Y OPTIMIZADO PARA ENVÍO REAL) ---
     contactForm?.addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -318,7 +317,7 @@ Solicito una cotización formal para servicio de TI para mi empresa.
         // Feedback visual de carga en el botón
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerText = "Enviando solicitud...";
+            submitBtn.innerText = "Preparando correo...";
             submitBtn.style.opacity = "0.7";
         }
 
@@ -327,53 +326,32 @@ Solicito una cotización formal para servicio de TI para mi empresa.
         cotizacionTemporal.empresa = document.getElementById('form-company').value.trim();
         cotizacionTemporal.email = document.getElementById('form-email').value.trim();
         cotizacionTemporal.telefono = document.getElementById('form-phone').value.trim();
-        cotizacionTemporal.plan = formPlan.value;
+        cotizacionTemporal.plan = formPlan.value || "No especificado";
         cotizacionTemporal.mensaje = formMessage.value.trim() || "Ninguno";
 
-        const subject = formatProfessionalEmailSubject(cotizacionTemporal);
-        const body = formatProfessionalEmailBody(cotizacionTemporal);
+        // Generar el asunto y el cuerpo usando tus funciones de formato con codificación web correcta (%0A)
+        const subjectText = formatProfessionalEmailSubject(cotizacionTemporal);
+        const bodyText = formatProfessionalEmailBody(cotizacionTemporal);
 
-        // Mapeo estructurado para que el correo te llegue legible y ordenado
-        const datosCorreo = {
-            "Nombre del Cliente": cotizacionTemporal.nombre,
-            "Empresa / Organización": cotizacionTemporal.empresa,
-            "Correo de Contacto": cotizacionTemporal.email,
-            "Teléfono": cotizacionTemporal.telefono,
-            "Servicio Solicitado": cotizacionTemporal.plan,
-            "Mensaje o Requerimientos": cotizacionTemporal.mensaje,
-            "_subject": subject
-        };
+        // Mostrar el panel de éxito en la interfaz (UX)
+        formSuccess?.classList.remove('hidden');
 
-        // Despacho asíncrono vía AJAX/Fetch a FormSubmit
-        fetch("https://formsubmit.co/ajax/coronel.lumbreras@gmail.com", {
-            method: "POST",
-            headers: { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(datosCorreo)
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Error en la API de correo.');
-            return response.json();
-        })
-        .then(data => {
-            console.log("Correo enviado de fondo exitosamente:", data);
-            // Mostrar la ventana emergente / panel interactivo de éxito
-            formSuccess?.classList.remove('hidden');
-        })
-        .catch(error => {
-            console.error("Fallo de envío:", error);
-            alert("No pudimos procesar el correo de forma automática. Por favor, usa el botón de WhatsApp para contactarnos.");
-        })
-        .finally(() => {
-            // Reestablecer propiedades del botón de enviar
+        // --- DISPARAR APERTURA DEL CLIENTE NATIVO (PC / MÓVIL) ---
+        // Usamos directamente el protocolo mailto con el cuerpo correctamente formateado.
+        // Esto obligará a iOS, Android, Windows y macOS a abrir su app predeterminada (Outlook, Gmail, Apple Mail, etc.)
+        const mailtoUrl = `mailto:${encodeURIComponent(contactoEmail)}?subject=${encodeURIComponent(subjectText)}&body=${bodyText}`;
+        
+        // Redirección inmediata
+        window.location.href = mailtoUrl;
+
+        // Reestablecer propiedades del botón de enviar tras el disparo
+        setTimeout(() => {
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Solicitar Cotización";
                 submitBtn.style.opacity = "1";
             }
-        });
+        }, 1000);
     });
 
     // --- ENVIAR DATOS ADICIONALES A WHATSAPP ---
